@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import {Link, useLocation} from "wouter"
+import useGifs from '../../hooks/useGifs'
+import ListOfGifs from '../../components/ListOfGifs/ListOfGifs'
 
 const POPULAR_GIFS = ["Vegeta", "Matrix", "Nietzsche", "Catdog"]
 
@@ -7,6 +9,8 @@ export default function Home() {
     const [searchkeyword, setSearchKeyword] = useState('')
 
     const [path, pushLocation] = useLocation()
+
+    const {loading, gifs} = useGifs()
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -27,6 +31,8 @@ export default function Home() {
                     value={searchkeyword}
                 />
             </form>
+            <h3 className="App-title">Ultima Búsqueda</h3>
+            <ListOfGifs gifs={gifs}/>
             <h3 className="App-title">Gifs más populares</h3>
             <ul>
                 {POPULAR_GIFS.map(popularGif => (
