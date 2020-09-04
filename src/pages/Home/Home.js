@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import {Link, useLocation} from "wouter"
 import useGifs from '../../hooks/useGifs'
 import ListOfGifs from '../../components/ListOfGifs/ListOfGifs'
+import TrendingSearches from '../../components/TrendingSearches/TrendingSearches'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
 import './Home.css'
@@ -38,18 +39,15 @@ export default function Home() {
                     <FontAwesomeIcon icon={faSearch}/>
                 </button>
             </form>
-            <h3 className="App-title">Ultima Búsqueda</h3>
-            <ListOfGifs gifs={gifs}/>
-            <h3 className="App-title">Gifs más populares</h3>
-            <ul>
-                {POPULAR_GIFS.map(popularGif => (
-                    <li key={popularGif}>
-                        <Link to={`/search/${popularGif}`}>
-                            Gifs de {popularGif}
-                        </Link>
-                    </li>
-                ))}
-            </ul>
+            <div className="App-main">
+                <div className="App-results">
+                    <h3 className="App-title">Última Búsqueda</h3>
+                    <ListOfGifs gifs={gifs}/>
+                </div>
+                <div className="AppCategory">
+                    <TrendingSearches />
+                </div>
+            </div>
         </>
     )
 }
