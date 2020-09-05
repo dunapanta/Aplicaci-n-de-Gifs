@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import {Link, useLocation} from "wouter"
 import useGifs from '../../hooks/useGifs'
 import ListOfGifs from '../../components/ListOfGifs/ListOfGifs'
-import TrendingSearches from '../../components/TrendingSearches/TrendingSearches'
+import LazyTrending from '../../components/TrendingSearches/LazyTrending'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
 import './Home.css'
@@ -45,7 +45,7 @@ export default function Home() {
                     <ListOfGifs gifs={gifs}/>
                 </div>
                 <div className="AppCategory">
-                    <TrendingSearches />
+                    <LazyTrending />
                 </div>
             </div>
         </>
