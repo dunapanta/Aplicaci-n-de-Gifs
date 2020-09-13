@@ -1,10 +1,13 @@
 import { useState, useEffect, useRef} from 'react'
 
-export default function useNearScreen ({distance = '100px'} = {}) {
+export default function useNearScreen ({distance = '100px', externalRef, once=true} = {}) {
     const [isNearScreen, setShow] = useState(false)
     const fromRef = useRef()
 
     useEffect( () => {
+        //esta linea es parte de infinite scroll
+        const element = externalRef ? externalRef.current : fromRef.current
+
         //intersection observer es una API que permite detectar si un elemento esta en el viewport
 
         //recibe 2 parametos: el callback que se ejecuta cada vez que haya 
@@ -17,14 +20,16 @@ export default function useNearScreen ({distance = '100px'} = {}) {
             if (el.isIntersecting){
                 setShow(true)
                 //importante desconectarse cuando sucedio interseccion
-                observer.disconnect()
+                once && observer.disconnect()
+            } else {
+                !once && setShow(false)
             }
         }
         const observer = new IntersectionObserver(onChange, {
             rootMargin: distance
         })
         /* accedo al valor de la referencia con current */
-        observer.observe(fromRef.current)
+        if (externalRef) observer.observe(element)
 
         //el effecto puede devolver una funcion para limpiar eventos
         // cuando este componente se deje de utilizar ejecuta esto y limpia evento
