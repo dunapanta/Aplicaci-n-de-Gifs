@@ -1,9 +1,26 @@
-/* html {
-  box-sizing: border-box;
+:root {
+  --fz: 16px;
+  --theme--contrast-0: #121212;
+  --theme-body-bg: #18061f;
+  --theme-body-txt: #f3f3f3;
+  --search-size-mx-h: 3rem;
+  --zIndex-header: 20;
+  --zIndex-component: 5;
+  --brand-color_1: #00ff99;
+  --brand-color_2: #00ccff;
+  --brand-color_3: #9933ff;
+  --brand-color_4: #9933ff;
+  --brand-color_5: #fff35c;
 }
+
+html {
+  box-sizing: border-box;
+  font-size: 1rem;
+}
+
 *,
 *:before,
-*:after {
+/* *:after {
   box-sizing: inherit;
 } */
 
@@ -33,3 +50,11 @@ form {
   margin: 0 auto 20px;
   justify-content: center;
 }
+
+.o-header {
+  background-color: inherit;
+  position: sticky;
+  top: 0;
+  z-index: var(--zIndex-header);
+  max-height: var(--search-size-mx-h);
+} 
