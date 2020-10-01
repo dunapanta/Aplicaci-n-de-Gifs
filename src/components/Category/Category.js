@@ -8,7 +8,7 @@ export default function Category({name, options = [], ...props}){
             <h3 className="AppTitle">{name}</h3>
             <ul className="CategoryList">
                 {options.map(popularGif => (
-                    <li key={popularGif}>
+                    <li key={popularGif} className="Category-list-item">
                         <Link 
                             className="CategoryLink"
                             to={`/search/${popularGif}`}
