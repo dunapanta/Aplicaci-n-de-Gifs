@@ -13,14 +13,18 @@ export default function Home() {
     return (
         <>
             {/* Buscador */}
-            <SearchForm />
-            <div className="App-main">
-                <div className="App-results">
-                    <h3 className="App-title">Última Búsqueda</h3>
-                    <ListOfGifs gifs={gifs}/>
-                </div>
-                <div className="AppCategory">
-                    <LazyTrending />
+            <header className="o-header">
+                <SearchForm />
+            </header>
+            <div className="App-wrapper">
+                <div className="App-main">
+                    <div className="App-results">
+                        <h3 className="App-title">Última Búsqueda</h3>
+                        <ListOfGifs gifs={gifs}/>
+                    </div>
+                    <div className="AppCategory">
+                        <LazyTrending />
+                    </div>
                 </div>
             </div>
         </>

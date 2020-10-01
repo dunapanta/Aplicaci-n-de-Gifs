@@ -45,10 +45,12 @@ ul {
   margin: 0;
   padding: 0;
 }
+
 form {
   display: flex;
   margin: 0 auto 20px;
   justify-content: center;
+  min-width: 25rem;
 }
 
 .o-header {
