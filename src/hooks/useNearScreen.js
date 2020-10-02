@@ -1,49 +1,38 @@
-import { useState, useEffect, useRef} from 'react'
+import {useEffect, useState, useRef} from 'react'
 
-export default function useNearScreen ({distance = '100px', externalRef, once=true} = {}) {
-    const [isNearScreen, setShow] = useState(false)
-    const fromRef = useRef()
+export default function useNearScreen ({ distance = '100px', externalRef, once = true } = {}) {
+  const [isNearScreen, setShow] = useState(false)
+  const fromRef = useRef()
 
-    useEffect( () => {
-        let observer
-        //esta linea es parte de infinite scroll
-        const element = externalRef ? externalRef.current : fromRef.current
-        if (!element) return
+  useEffect(() => {
+    let observer
 
-        //intersection observer es una API que permite detectar si un elemento esta en el viewport
+    const element = externalRef ? externalRef.current : fromRef.current
 
-        //recibe 2 parametos: el callback que se ejecuta cada vez que haya 
-        //una actualizacion sobre lo que observa y el otro es un objeto de opciones
+    const onChange = (entries, observer) => {
+      const el = entries[0]
+      if (el.isIntersecting) {
+        setShow(true)
+        once && observer.disconnect()
+      } else {
+        !once && setShow(false)
+      }
+    }
 
-        const onChange = (entries, observer) => {
-            console.log(entries)
-            const el = entries[0]
-            console.log(el.isIntersecting)
-            if (el.isIntersecting){
-                setShow(true)
-                //importante desconectarse cuando sucedio interseccion
-                once && observer.disconnect()
-            } else {
-                !once && setShow(false)
-            }
-        }
+    Promise.resolve(
+      typeof IntersectionObserver !== 'undefined'
+        ? IntersectionObserver
+        : import('intersection-observer')
+    ).then(() => {
+      observer = new IntersectionObserver(onChange, {
+        rootMargin: distance
+      })
+  
+      if (element) observer.observe(element)
+    })
 
-        Promise.resolve(
-            typeof IntersectionObserver !== 'undefined'
-              ? IntersectionObserver
-              : import('intersection-observer')
-          ).then(() => {
-            observer = new IntersectionObserver(onChange, {
-              rootMargin: distance
-            })
-        
-            observer.observe(element)
-          })
-        //el effecto puede devolver una funcion para limpiar eventos
-        // cuando este componente se deje de utilizar ejecuta esto y limpia evento
-        // evita ejecutar setShow cuando este componente no esta disponible (es un error tipico)
-        return () => observer.disconnect()
-    }, [distance, externalRef, once])
+    return () => observer && observer.disconnect()
+  })
 
-    return {isNearScreen, fromRef}
+  return {isNearScreen, fromRef}
 }

@@ -3,7 +3,7 @@
 }
 
 .App-content {
-  background-color: var(--theme-body-bg);
+  background-color: #282c34;
   color: var(--theme-body-txt);
   min-height: 100vh;
   display: flex;

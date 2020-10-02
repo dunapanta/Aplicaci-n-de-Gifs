@@ -13,7 +13,7 @@ function App() {
       <div className="App">
         <section className="App-content">
           <Link to="/">
-            <h1>App</h1>
+            <h1 style={{margin: "20px", cursor: "pointer"}}>App Gifs</h1>
           </Link>
           <GifsContextProvider>
             <Route 
