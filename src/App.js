@@ -3,6 +3,7 @@ import './App.css';
 import Home from './pages/Home/Home'
 import SearchResults from './pages/SearchResults/SearchResults'
 import Detail from './pages/Detail/Detail'
+import NotFound from './pages/NotFound/NotFound';
 import { Link, Route } from 'wouter'
 import Context from './context/StaticContext'
 import {GifsContextProvider} from './context/GifsContext'
@@ -27,6 +28,10 @@ function App() {
             <Route 
               component={Detail}
               path="/gif/:id"
+            />
+            <Route 
+              component={NotFound}
+              path="/404"
             />
         </GifsContextProvider>
         </section>
