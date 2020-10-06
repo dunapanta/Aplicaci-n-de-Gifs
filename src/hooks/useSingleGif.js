@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import {useState, useEffect} from 'react'
 import useGifs from './useGifs'
 import getSingleGif from '../services/getSingleGif'
 

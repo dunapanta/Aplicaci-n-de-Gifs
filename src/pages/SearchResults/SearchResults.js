@@ -4,6 +4,7 @@ import ListOfGifs from '../../components/ListOfGifs/ListOfGifs'
 import useGifs from '../../hooks/useGifs'
 import useNearScreen from '../../hooks/useNearScreen'
 import debounce from 'just-debounce-it'
+import { Helmet } from 'react-helmet'
 import "./SearchResults.css"
 
 export default function SearchResults({params}){
@@ -14,6 +15,8 @@ export default function SearchResults({params}){
         externalRef: loading ? null : externalRef,
         once: false
     })
+
+    const title = gifs ? `${gifs.length} resultados de ${keyword}` : ""
    
     // funcion para evitar que se hagan multiples de una peticiones en cierto tiempo
     const debounceHandleNextPage = useCallback(
@@ -33,6 +36,9 @@ export default function SearchResults({params}){
             loading 
                 ? <Spinner />
                 : <>
+                    <Helmet>
+                        <title>{title}</title>
+                    </Helmet>
                     <div className="App-wrapper">
                         <h3 className="App-title">{decodeURI(keyword)}</h3>
                         <ListOfGifs gifs={gifs} />

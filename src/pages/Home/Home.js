@@ -3,6 +3,7 @@ import useGifs from '../../hooks/useGifs'
 import ListOfGifs from '../../components/ListOfGifs/ListOfGifs'
 import LazyTrending from '../../components/TrendingSearches/LazyTrending'
 import SearchForm from '../../components/SearchForm/SearchForm'
+import {Helmet} from 'react-helmet'
 import './Home.css'
 
 export default function Home() {
@@ -12,6 +13,9 @@ export default function Home() {
     
     return (
         <>
+            <Helmet>
+                <title>App Gifs</title>
+            </Helmet>
             {/* Buscador */}
             <header className="o-header">
                 <SearchForm />
