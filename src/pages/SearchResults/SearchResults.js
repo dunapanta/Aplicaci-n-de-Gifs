@@ -1,14 +1,14 @@
 import React, {useCallback, useRef, useEffect} from 'react'
 import Spinner from '../../components/Spinner/Spinner'
 import ListOfGifs from '../../components/ListOfGifs/ListOfGifs'
-/* import SearchForm from '../../components/SearchForm/SearchForm' */
+import SearchForm from '../../components/SearchForm/SearchForm'
 import useGifs from '../../hooks/useGifs'
 import useNearScreen from '../../hooks/useNearScreen'
 import debounce from 'just-debounce-it'
 import { Helmet } from 'react-helmet'
 import "./SearchResults.css"
 
-export default function SearchResults({params}){
+export default function SearchResults({params}){ 
     const {keyword} = params
     const {loading, gifs, setPage} = useGifs({keyword})
     const externalRef = useRef()
